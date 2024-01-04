@@ -24,10 +24,20 @@ function App() {
 
   return (
     <>
-      <div>
-        <button onClick={() => spawn(account)}>spawn</button>
+      <div className="h-screen w-screen bg-black text-terminal-green">
+        <button
+          className="p-3 border-terminal-green border"
+          onClick={() => spawn(account)}
+        >
+          spawn
+        </button>
 
-        <button onClick={() => explore(account, 1)}>explore</button>
+        <button
+          className="p-3 border-terminal-green border"
+          onClick={() => explore(account, 1)}
+        >
+          explore
+        </button>
 
         <pre>{JSON.stringify(adventurer, null, 2)}</pre>
       </div>
