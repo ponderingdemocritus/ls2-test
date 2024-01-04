@@ -4,11 +4,9 @@ import { SetupNetworkResult } from "./setupNetwork";
 export type ClientComponents = ReturnType<typeof createClientComponents>;
 
 export function createClientComponents({
-    contractComponents,
+  contractComponents,
 }: SetupNetworkResult) {
-    return {
-        ...contractComponents,
-        Position: overridableComponent(contractComponents.Position),
-        Moves: overridableComponent(contractComponents.Moves),
-    };
+  return {
+    ...contractComponents,
+  };
 }

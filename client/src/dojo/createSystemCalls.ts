@@ -17,40 +17,16 @@ export function createSystemCalls(
   { Position, Moves }: ClientComponents
 ) {
   const spawn = async (signer: Account) => {
-    const entityId = getEntityIdFromKeys([BigInt(signer.address)]) as Entity;
-
-    const positionId = uuid();
-    Position.addOverride(positionId, {
-      entity: entityId,
-      value: { player: BigInt(entityId), vec: { x: 10, y: 10 } },
-    });
-
-    const movesId = uuid();
-    Moves.addOverride(movesId, {
-      entity: entityId,
-      value: {
-        player: BigInt(entityId),
-        remaining: 100,
-        last_direction: 0,
-      },
-    });
-
     try {
-      const { transaction_hash } = await execute(
-        signer,
-        "actions",
-        "spawn",
-        []
-      );
+      await execute(signer, "spawn", "spawn", []);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
-      setComponentsFromEvents(
-        contractComponents,
-        getEvents(
-          await signer.waitForTransaction(transaction_hash, {
-            retryInterval: 100,
-          })
-        )
-      );
+  const explore = async (signer: Account, adventurer_id: number) => {
+    try {
+      await execute(signer, "explore", "explore", [adventurer_id]);
     } catch (e) {
       console.log(e);
     }
@@ -58,5 +34,6 @@ export function createSystemCalls(
 
   return {
     spawn,
+    explore,
   };
 }

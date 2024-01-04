@@ -9,31 +9,28 @@ import { getEntityIdFromKeys } from "@dojoengine/utils";
 function App() {
   const {
     setup: {
-      systemCalls: { spawn, move },
-      components: { Moves, Position },
+      systemCalls: { spawn, explore },
+      components: { Adventurer, AdventurerOwner },
     },
-    account: {
-      create,
-      list,
-      select,
-      account,
-      isDeploying,
-      clear,
-      copyToClipboard,
-      applyFromClipboard,
-    },
+    account: { account },
   } = useDojo();
 
   // entity id we are syncing
-  const entityId = getEntityIdFromKeys([BigInt(account.address)]) as Entity;
+  const entityId = getEntityIdFromKeys([BigInt(1)]) as Entity;
 
-  // get current component values
-  const position = useComponentValue(Position, entityId);
-  const moves = useComponentValue(Moves, entityId);
+  const adventurer = useComponentValue(Adventurer, entityId);
+
+  console.log(adventurer);
 
   return (
     <>
-      <div></div>
+      <div>
+        <button onClick={() => spawn(account)}>spawn</button>
+
+        <button onClick={() => explore(account, 1)}>explore</button>
+
+        <pre>{JSON.stringify(adventurer, null, 2)}</pre>
+      </div>
     </>
   );
 }
