@@ -3,39 +3,142 @@
 import { defineComponent, Type as RecsType, World } from "@dojoengine/recs";
 
 export function defineContractComponents(world: World) {
-    return {
-        Moves: (() => {
-            return defineComponent(
-                world,
-                {
-                    player: RecsType.BigInt,
-                    remaining: RecsType.Number,
-                    last_direction: RecsType.Number,
-                },
-                {
-                    metadata: {
-                        name: "Moves",
-                        types: ["contractaddress", "u8", "enum"],
-                        customTypes: ["Direction"],
-                    },
-                }
-            );
-        })(),
-        Position: (() => {
-            return defineComponent(
-                world,
-                {
-                    player: RecsType.BigInt,
-                    vec: { x: RecsType.Number, y: RecsType.Number },
-                },
-                {
-                    metadata: {
-                        name: "Position",
-                        types: ["contractaddress", "u32", "u32"],
-                        customTypes: ["Vec2"],
-                    },
-                }
-            );
-        })(),
-    };
+  return {
+    Adventurer: (() => {
+      return defineComponent(
+        world,
+        {
+          adventurer_id: RecsType.Number,
+          last_action_block: RecsType.Number,
+          health: RecsType.Number,
+          xp: RecsType.Number,
+          stats: {
+            strength: RecsType.Number,
+            dexterity: RecsType.Number,
+            vitality: RecsType.Number,
+            intelligence: RecsType.Number,
+            wisdom: RecsType.Number,
+            charisma: RecsType.Number,
+            luck: RecsType.Number,
+          },
+          gold: RecsType.Number,
+          weapon: {
+            id: RecsType.Number,
+            xp: RecsType.Number,
+            metadata: RecsType.Number,
+          },
+          chest: {
+            id: RecsType.Number,
+            xp: RecsType.Number,
+            metadata: RecsType.Number,
+          },
+          head: {
+            id: RecsType.Number,
+            xp: RecsType.Number,
+            metadata: RecsType.Number,
+          },
+          waist: {
+            id: RecsType.Number,
+            xp: RecsType.Number,
+            metadata: RecsType.Number,
+          },
+          foot: {
+            id: RecsType.Number,
+            xp: RecsType.Number,
+            metadata: RecsType.Number,
+          },
+          hand: {
+            id: RecsType.Number,
+            xp: RecsType.Number,
+            metadata: RecsType.Number,
+          },
+          neck: {
+            id: RecsType.Number,
+            xp: RecsType.Number,
+            metadata: RecsType.Number,
+          },
+          ring: {
+            id: RecsType.Number,
+            xp: RecsType.Number,
+            metadata: RecsType.Number,
+          },
+          beast_health: RecsType.Number,
+          stat_points_available: RecsType.Number,
+          actions_per_block: RecsType.Number,
+          mutated: RecsType.Boolean,
+        },
+        {
+          metadata: {
+            name: "Adventurer",
+            types: [
+              "u32",
+              "u16",
+              "u16",
+              "u16",
+              "u8",
+              "u8",
+              "u8",
+              "u8",
+              "u8",
+              "u8",
+              "u8",
+              "u16",
+              "u8",
+              "u16",
+              "u8",
+              "u8",
+              "u16",
+              "u8",
+              "u8",
+              "u16",
+              "u8",
+              "u8",
+              "u16",
+              "u8",
+              "u8",
+              "u16",
+              "u8",
+              "u8",
+              "u16",
+              "u8",
+              "u8",
+              "u16",
+              "u8",
+              "u8",
+              "u16",
+              "u8",
+              "u16",
+              "u8",
+              "u8",
+              "bool",
+            ],
+            customTypes: [
+              "Stats",
+              "ItemPrimitive",
+              "ItemPrimitive",
+              "ItemPrimitive",
+              "ItemPrimitive",
+              "ItemPrimitive",
+              "ItemPrimitive",
+              "ItemPrimitive",
+              "ItemPrimitive",
+            ],
+          },
+        }
+      );
+    })(),
+    AdventurerOwner: (() => {
+      return defineComponent(
+        world,
+        { adventurer_id: RecsType.Number, owner: RecsType.BigInt },
+        {
+          metadata: {
+            name: "AdventurerOwner",
+            types: ["u32", "contractaddress"],
+            customTypes: [],
+          },
+        }
+      );
+    })(),
+  };
 }
